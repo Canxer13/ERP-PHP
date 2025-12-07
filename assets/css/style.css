@@ -1,0 +1,149 @@
+:root {
+  --primary-bg: #2d2d2d; /* Warna Sidebar Gelap */
+  --accent-color: #714b67; /* Warna Ungu Utama (Sesuai PDF) */
+  --accent-hover: #5a3b52;
+  --body-bg: #f9f9fa;
+  --text-color: #333;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+/* SIDEBAR STYLING */
+/* --- SIDEBAR FIX SCROLLING --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0; /* Paksa memanjang sampai bawah */
+  width: 250px;
+  background-color: var(--primary-bg);
+  color: #fff;
+  padding-top: 1rem;
+  z-index: 1000;
+
+  /* INI KUNCINYA: Agar bisa di-scroll ke bawah */
+  overflow-y: auto;
+
+  /* Opsional: Sembunyikan scrollbar default biar rapi tapi tetap bisa discroll */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Mempercantik Scrollbar untuk Chrome/Edge/Safari */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #6c757d;
+  padding: 10px 25px;
+  margin-top: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: 0.3s;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-left-color: var(--accent-color);
+}
+
+.sidebar-link i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* SUBMENU */
+.sidebar-submenu {
+  background: rgba(0, 0, 0, 0.2);
+}
+.sidebar-submenu .sidebar-link {
+  padding-left: 55px;
+  font-size: 0.9em;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left: 250px;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+/* CUSTOM COMPONENTS */
+.btn-primary-erp {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+}
+.btn-primary-erp:hover {
+  background-color: var(--accent-hover);
+  color: white;
+}
+
+.card-erp {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.badge-draft {
+  background-color: #e9ecef;
+  color: #495057;
+}
+.badge-confirmed {
+  background-color: #cff4fc;
+  color: #055160;
+}
+.badge-done {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+/* UTILS */
+.dropdown-toggle-icon {
+  transition: transform 0.3s;
+}
+.collapsed .dropdown-toggle-icon {
+  transform: rotate(-90deg);
+}
