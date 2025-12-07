@@ -1,11 +1,3 @@
-:root {
-  --primary-bg: #2d2d2d; /* Warna Sidebar Gelap */
-  --accent-color: #714b67; /* Warna Ungu Utama (Sesuai PDF) */
-  --accent-hover: #5a3b52;
-  --body-bg: #f9f9fa;
-  --text-color: #333;
-}
-
 body {
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--body-bg);
@@ -15,91 +7,157 @@ body {
   padding: 0;
 }
 
-/* SIDEBAR STYLING */
-/* --- SIDEBAR FIX SCROLLING --- */
+/* --- MODERN SIDEBAR DESIGN --- */
+:root {
+  --sidebar-bg: #b08d73; /* Your current beige/brown color */
+  --sidebar-text: #4a3b32;
+  --sidebar-hover: rgba(255, 255, 255, 0.4);
+  --sidebar-active: #fff;
+  --accent-color: #714b67;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0; /* Paksa memanjang sampai bawah */
-  width: 250px;
-  background-color: var(--primary-bg);
-  color: #fff;
-  padding-top: 1rem;
+  bottom: 0;
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding-top: 0;
   z-index: 1000;
-
-  /* INI KUNCINYA: Agar bisa di-scroll ke bawah */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-
-  /* Opsional: Sembunyikan scrollbar default biar rapi tapi tetap bisa discroll */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Mempercantik Scrollbar untuk Chrome/Edge/Safari */
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+/* Header Area */
+.sidebar-header {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 25px 20px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .sidebar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: white;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   display: block;
 }
 
-.sidebar-heading {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: #6c757d;
-  padding: 10px 25px;
-  margin-top: 15px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+.user-info {
+  font-size: 0.85rem;
+  color: #fff;
+  margin-top: 5px;
+  opacity: 0.9;
 }
 
+.user-role {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* Menu Section Headers */
+.sidebar-heading {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 15px 25px 5px;
+  margin-top: 10px;
+}
+
+/* Links */
 .sidebar-link {
   display: flex;
   align-items: center;
-  padding: 10px 25px;
-  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 25px;
+  color: var(--sidebar-text);
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: all 0.3s ease;
   border-left: 4px solid transparent;
 }
 
-.sidebar-link:hover,
-.sidebar-link.active {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  border-left-color: var(--accent-color);
-}
-
 .sidebar-link i {
+  width: 24px;
+  font-size: 1.1rem;
   margin-right: 10px;
-  width: 20px;
-  text-align: center;
+  transition: transform 0.3s;
 }
 
-/* SUBMENU */
-.sidebar-submenu {
-  background: rgba(0, 0, 0, 0.2);
+.sidebar-link:hover {
+  background-color: var(--sidebar-hover);
+  color: #fff;
+  padding-left: 30px; /* Slide effect */
 }
+
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-left-color: #fff;
+  font-weight: 700;
+}
+
+/* Dropdown Arrow */
+.dropdown-toggle-icon {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  transition: transform 0.3s;
+}
+.sidebar-link[aria-expanded="true"] .dropdown-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+.sidebar-submenu {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 5px 0;
+}
+
 .sidebar-submenu .sidebar-link {
-  padding-left: 55px;
-  font-size: 0.9em;
+  padding-left: 58px;
+  font-size: 0.9rem;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.sidebar-submenu .sidebar-link:hover {
+  padding-left: 63px;
+}
+
+/* Logout Button Area */
+.logout-area {
+  margin: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-logout {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  transition: 0.3s;
+  background: transparent;
+}
+
+.btn-logout:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
 /* MAIN CONTENT */

@@ -47,81 +47,70 @@ $role = $_SESSION['role'] ?? 'staff';
 
 <div class="d-flex">
     
-    <nav class="sidebar">
-        <div class="p-3 text-center border-bottom border-secondary mb-2">
-            <a href="<?= $base_url ?>/index.php" class="sidebar-brand mb-0">NOITIO ERP</a>
-            <div class="small text-white-50 mt-1">Hi, <?= $_SESSION['full_name'] ?></div>
-            <div class="badge bg-secondary mt-1 text-uppercase"><?= $role ?></div>
-        </div>
-        
-        <a href="<?= $base_url ?>/index.php" class="sidebar-link <?= ($uri == $base_url.'/index.php' || $uri == $base_url.'/') ? 'active' : '' ?>">
-            <i class="bi bi-speedometer2"></i> Dashboard
+    <<nav class="sidebar">
+    <div class="sidebar-header">
+        <a href="<?= $base_url ?>/index.php" class="sidebar-brand">
+            <i class="bi bi-box-seam me-2"></i>NOITIO ERP
         </a>
+        <div class="user-info">Hi, <?= htmlspecialchars($_SESSION['full_name'] ?? 'Guest') ?></div>
+        <div class="user-role"><?= htmlspecialchars($_SESSION['role'] ?? 'Guest') ?></div>
+    </div>
+    
+    <a href="<?= $base_url ?>/index.php" class="sidebar-link <?= ($uri == $base_url.'/index.php' || $uri == $base_url.'/') ? 'active' : '' ?>">
+        <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
+    </a>
 
-        <?php if($role === 'super_admin'): ?>
-        <div class="sidebar-heading text-warning">Administration</div>
-        <a href="#menuHR" data-bs-toggle="collapse" class="sidebar-link <?= $is_hr ? 'active' : '' ?>">
-            <i class="bi bi-people"></i> <span>HR & Users</span>
-            <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
+    <div class="sidebar-heading">OPERATIONS</div>
+
+    <a href="#menuSales" data-bs-toggle="collapse" class="sidebar-link <?= $is_sales ? 'active' : '' ?>" aria-expanded="<?= $is_sales ? 'true' : 'false' ?>">
+        <i class="bi bi-cart3"></i> <span>Sales</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
+    </a>
+    <div class="collapse <?= $is_sales ? 'show' : '' ?>" id="menuSales">
+        <div class="sidebar-submenu">
+            <a href="<?= $base_url ?>/sales/orders.php" class="sidebar-link">Quotations / Orders</a>
+            <a href="<?= $base_url ?>/sales/customer_list.php" class="sidebar-link">Customers</a>
+        </div>
+    </div>
+
+    <a href="#menuPur" data-bs-toggle="collapse" class="sidebar-link <?= $is_pur ? 'active' : '' ?>" aria-expanded="<?= $is_pur ? 'true' : 'false' ?>">
+        <i class="bi bi-bag"></i> <span>Purchasing</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
+    </a>
+    <div class="collapse <?= $is_pur ? 'show' : '' ?>" id="menuPur">
+        <div class="sidebar-submenu">
+            <a href="<?= $base_url ?>/purchasing/rfq_list.php" class="sidebar-link">Requests for Quotation</a>
+            <a href="<?= $base_url ?>/purchasing/vendors.php" class="sidebar-link">Vendors</a>
+        </div>
+    </div>
+
+    <a href="#menuMfg" data-bs-toggle="collapse" class="sidebar-link <?= $is_mfg ? 'active' : '' ?>" aria-expanded="<?= $is_mfg ? 'true' : 'false' ?>">
+        <i class="bi bi-tools"></i> <span>Manufacturing</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
+    </a>
+    <div class="collapse <?= $is_mfg ? 'show' : '' ?>" id="menuMfg">
+        <div class="sidebar-submenu">
+            <a href="<?= $base_url ?>/manufacturing/mo_list.php" class="sidebar-link">Manufacturing Orders</a>
+            <a href="<?= $base_url ?>/manufacturing/products.php" class="sidebar-link">Products</a>
+            <a href="<?= $base_url ?>/manufacturing/bom.php" class="sidebar-link">Bills of Materials</a>
+        </div>
+    </div>
+
+    <a href="#menuAcc" data-bs-toggle="collapse" class="sidebar-link <?= $is_acc ? 'active' : '' ?>" aria-expanded="<?= $is_acc ? 'true' : 'false' ?>">
+        <i class="bi bi-wallet2"></i> <span>Accounting</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
+    </a>
+    <div class="collapse <?= $is_acc ? 'show' : '' ?>" id="menuAcc">
+        <div class="sidebar-submenu">
+            <a href="<?= $base_url ?>/manufacturing/bills.php" class="sidebar-link">Vendor Bills</a>
+        </div>
+    </div>
+
+    <div class="logout-area">
+        <a href="<?= $base_url ?>/auth/logout.php" class="btn btn-logout">
+            <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>
-        <div class="collapse <?= $is_hr ? 'show' : '' ?>" id="menuHR">
-            <div class="sidebar-submenu">
-                <a href="<?= $base_url ?>/hr/staff_list.php" class="sidebar-link">Staff List</a>
-                <a href="<?= $base_url ?>/hr/departments.php" class="sidebar-link">Departments</a>
-            </div>
-        </div>
-        <?php endif; ?>
-
-        <div class="sidebar-heading">Operations</div>
-        <a href="#menuSales" data-bs-toggle="collapse" class="sidebar-link <?= $is_sales ? 'active' : '' ?>">
-            <i class="bi bi-cart3"></i> <span>Sales</span>
-            <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
-        </a>
-        <div class="collapse <?= $is_sales ? 'show' : '' ?>" id="menuSales">
-            <div class="sidebar-submenu">
-                <a href="<?= $base_url ?>/sales/orders.php" class="sidebar-link">Quotations</a>
-                <a href="<?= $base_url ?>/sales/customer_list.php" class="sidebar-link">Customers</a>
-            </div>
-        </div>
-
-        <a href="#menuPur" data-bs-toggle="collapse" class="sidebar-link <?= $is_pur ? 'active' : '' ?>">
-            <i class="bi bi-bag"></i> <span>Purchasing</span>
-            <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
-        </a>
-        <div class="collapse <?= $is_pur ? 'show' : '' ?>" id="menuPur">
-            <div class="sidebar-submenu">
-                <a href="<?= $base_url ?>/purchasing/rfq_list.php" class="sidebar-link">RFQ</a>
-                <a href="<?= $base_url ?>/purchasing/vendors.php" class="sidebar-link">Vendors</a>
-            </div>
-        </div>
-
-        <a href="#menuMfg" data-bs-toggle="collapse" class="sidebar-link <?= $is_mfg ? 'active' : '' ?>">
-            <i class="bi bi-tools"></i> <span>Manufacturing</span>
-            <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
-        </a>
-        <div class="collapse <?= $is_mfg ? 'show' : '' ?>" id="menuMfg">
-            <div class="sidebar-submenu">
-                <a href="<?= $base_url ?>/manufacturing/mo_list.php" class="sidebar-link">Orders (MO)</a>
-                <a href="<?= $base_url ?>/manufacturing/products.php" class="sidebar-link">Products</a>
-                <a href="<?= $base_url ?>/manufacturing/bom.php" class="sidebar-link">BOM</a>
-            </div>
-        </div>
-
-        <a href="#menuAcc" data-bs-toggle="collapse" class="sidebar-link <?= $is_acc ? 'active' : '' ?>">
-            <i class="bi bi-wallet2"></i> <span>Accounting</span>
-            <i class="bi bi-chevron-down ms-auto dropdown-toggle-icon"></i>
-        </a>
-        <div class="collapse <?= $is_acc ? 'show' : '' ?>" id="menuAcc">
-            <div class="sidebar-submenu">
-                <a href="<?= $base_url ?>/manufacturing/bills.php" class="sidebar-link">Vendor Bills</a>
-            </div>
-        </div>
-
-        <div class="mt-4 px-3 pb-5">
-            <a href="<?= $base_url ?>/auth/logout.php" class="btn btn-outline-light w-100 btn-sm">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </a>
-        </div>
-    </nav>
+    </div>
+</nav>
     
     <div class="main-content w-100">
